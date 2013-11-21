@@ -1,0 +1,22 @@
+{% extends "AcmeStoreBundle::layout.html.twig" %}
+
+{% block content %}
+
+    <div id="wrap">
+        <div class="container">
+            <div class="alert alert-success">
+                <h2>{{ category.name }}</h2>
+            </div>
+
+            {% for product in products %}
+
+                <h2>{{ product.name }}</h2>
+                <p><a class="btn btn-success" href="{{ path('acme_store_product_description',
+                   {'id': product.id}) }}" role="button">View details &raquo;</a></p>
+
+            {% endfor %}
+
+        </div>
+    </div>
+
+{% endblock %}

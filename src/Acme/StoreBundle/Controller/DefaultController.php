@@ -10,22 +10,92 @@ use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
-    public function indexAction($name)
+    public function indexAction()
     {
-        return $this->render('AcmeStoreBundle:Default:index.html.twig', array('name' => $name));
+        return $this->render('AcmeStoreBundle:Default:index.html.twig');
     }
+
+    public function showProductsAction()
+    {
+        $products = $this->getDoctrine()
+            ->getRepository('AcmeStoreBundle:Product')
+            ->findAll();
+
+        if (!$products) {
+            throw $this->createNotFoundException(
+                'No products found'
+            );
+        }
+
+        return $this->render('AcmeStoreBundle:Default:products.html.twig', array('products' => $products));
+    }
+
+    public function showCategoriesAction()
+    {
+        $categories = $this->getDoctrine()
+            ->getRepository('AcmeStoreBundle:Category')
+            ->findAll();
+
+        if (!$categories) {
+            throw $this->createNotFoundException(
+                'No categories found'
+            );
+        }
+
+        return $this->render('AcmeStoreBundle:Default:categories.html.twig', array('categories' => $categories));
+    }
+
+    public function descriptionProductAction($id)
+    {
+        $product = $this->getDoctrine()
+            ->getRepository('AcmeStoreBundle:Product')
+            ->find($id);
+
+        if (!$product) {
+            throw $this->createNotFoundException(
+                'No product found for Id'.$id
+            );
+        }
+
+        return $this->render('AcmeStoreBundle:Default:descriptionProducts.html.twig', array(
+            'product' => $product,
+            'description' => $product->getDescription()
+        ));
+    }
+
+    public function allProductsOfCategoryAction($id)
+    {
+        $category = $this->getDoctrine()
+            ->getRepository('AcmeStoreBundle:Category')
+            ->find($id);
+
+        $em = $this->getDoctrine()->getManager();
+        $products = $em->getRepository('AcmeStoreBundle:Product')
+                  ->findByCategory($id);
+
+
+
+        return $this->render('AcmeStoreBundle:Default:allProductsOfCategory.html.twig', array(
+            'category' => $category,
+            'products' => $products
+        ));
+    }
+
+
+
+//======================test read/write database  ==================
 
     public function createAction()
     {
         $category = new Category();
-        $category->setName('Main Products');
-        $category->setNamecat('Main jhgjhgjProducts');
+        $category->setName('Children');
+        $category->setNamecat("Kid's dress, shoes");
 
 
         $product = new Product();
-        $product->setName('Foo');
-        $product->setPrice(19.99);
-        $product->setDescription('hellooooooooooo');
+        $product->setName('dress');
+        $product->setPrice(10);
+        $product->setDescription('super puper dress for kids');
         // relate this product to the category
         $product->setCategory($category);
 
@@ -47,7 +117,7 @@ class DefaultController extends Controller
 
         if (!$product) {
             throw $this->createNotFoundException(
-                'No product found for id '.$id
+                'No product found for id '.c
             );
         }
         $categoryName = $product->getCategory()->getName();

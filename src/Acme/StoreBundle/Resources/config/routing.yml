@@ -1,6 +1,22 @@
 acme_store_homepage:
-    pattern:  /hello/{name}
+    pattern:  /
     defaults: { _controller: AcmeStoreBundle:Default:index }
+
+acme_store_products:
+    pattern:  /products
+    defaults: { _controller: AcmeStoreBundle:Default:showProducts }
+
+acme_store_categories:
+    pattern:  /categories
+    defaults: { _controller: AcmeStoreBundle:Default:showCategories }
+
+acme_store_product_description:
+    pattern:  /description/product/{id}
+    defaults: { _controller: AcmeStoreBundle:Default:descriptionProduct }
+
+acme_store_all_products_of_category:
+    pattern:  /description/category/{id}
+    defaults: { _controller: AcmeStoreBundle:Default:allProductsOfCategory }
 
 acme_store_create:
     pattern:  /create
