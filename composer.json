@@ -20,7 +20,8 @@
         "sensio/generator-bundle": "2.3.*",
         "incenteev/composer-parameter-handler": "~2.0",
         "twbs/bootstrap": "3.0.*@dev",
-        "components/jquery": "1.9.1"
+        "components/jquery": "1.9.1",
+        "doctrine/doctrine-fixtures-bundle": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [

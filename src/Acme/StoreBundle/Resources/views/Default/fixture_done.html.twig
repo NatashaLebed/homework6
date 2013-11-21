@@ -1,0 +1,16 @@
+{% extends "AcmeStoreBundle::layout.html.twig" %}
+
+{% block title "Success " %}
+
+    {% block content %}
+
+        <div id="wrap">
+            <div class="container">
+                <div class="alert alert-success">
+                    <h1>Success Load Demo Data</h1>
+                    <p><a class="btn btn-success" href="{{ path('acme_store_products') }}" role="button">View Products &raquo;</a></p>
+                </div>
+            </div>
+        </div>
+
+    {% endblock %}
