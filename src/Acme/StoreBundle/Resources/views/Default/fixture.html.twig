@@ -1,0 +1,16 @@
+{% extends "AcmeStoreBundle::layout.html.twig" %}
+
+{% block title "Fixture " %}
+
+    {% block content %}
+
+        <div id="wrap">
+            <div class="container">
+                <div class="alert alert-success">
+                    <h1>Load Demo Data</h1>
+                    <p><a class="btn btn-success" href="{{ path('acme_store_fixture_done') }}" role="button">Load &raquo;</a></p>
+                </div>
+            </div>
+        </div>
+
+    {% endblock %}
